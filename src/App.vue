@@ -1,9 +1,5 @@
 <script setup>
 import AppHeader from './components/AppHeader.vue'
-import HeroSection from './components/HeroSection.vue'
-import AboutSection from './components/AboutSection.vue'
-import ProjectsSection from './components/ProjectsSection.vue'
-import ContactSection from './components/ContactSection.vue'
 import AppFooter from './components/AppFooter.vue'
 </script>
 
@@ -12,19 +8,9 @@ import AppFooter from './components/AppFooter.vue'
     <!-- Navigation Header -->
     <AppHeader />
     
-    <!-- Main Content -->
+    <!-- Main Content - Router View -->
     <main>
-      <!-- Hero Section -->
-      <HeroSection />
-      
-      <!-- About Section -->
-      <AboutSection />
-      
-      <!-- Projects Section -->
-      <ProjectsSection />
-      
-      <!-- Contact Section -->
-      <ContactSection />
+      <router-view />
     </main>
     
     <!-- Footer -->
@@ -35,13 +21,19 @@ import AppFooter from './components/AppFooter.vue'
 <style>
 /* CSS Variables for consistent design */
 :root {
-  --primary-color: #2c3e50;
-  --secondary-color: #3498db;
-  --accent-color: #e74c3c;
-  --text-light: #ecf0f1;
-  --text-dark: #2c3e50;
+  /* Professional Color Palette */
+  --primary-color: #1E40AF;
+  --secondary-color: #2563EB;
+  --accent-color: #10B981;
+  --background: #F9FAFB;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  
+  /* Legacy variable mappings for backward compatibility */
+  --text-light: #F9FAFB;
+  --text-dark: #111827;
   --background-light: #ffffff;
-  --background-dark: #34495e;
+  --background-dark: #1E40AF;
   --section-padding: 4rem 0;
   --container-max-width: 1200px;
 }
@@ -61,7 +53,8 @@ html {
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: var(--text-dark);
+  color: var(--text-primary);
+  background-color: var(--background);
 }
 
 /* Container utility */
@@ -74,6 +67,17 @@ body {
 /* Section spacing */
 section {
   padding: var(--section-padding);
+}
+
+/* Main layout */
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
 }
 
 /* Responsive utilities */

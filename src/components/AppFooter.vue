@@ -13,10 +13,12 @@
         <!-- Quick Links -->
         <div class="col-md-6 text-center text-md-end">
           <div class="footer-links">
-            <a href="#home" @click="scrollToSection('home')" class="footer-link">Home</a>
-            <a href="#about" @click="scrollToSection('about')" class="footer-link">About</a>
-            <a href="#projects" @click="scrollToSection('projects')" class="footer-link">Projects</a>
-            <a href="#contact" @click="scrollToSection('contact')" class="footer-link">Contact</a>
+            <router-link to="/" class="footer-link">Home</router-link>
+            <router-link to="/#about" class="footer-link">About</router-link>
+            <router-link to="/#projects" class="footer-link">Projects</router-link>
+            <router-link to="/certificates" class="footer-link">Certificates</router-link>
+            <router-link to="/resume" class="footer-link">Resume</router-link>
+            <router-link to="/#contact" class="footer-link">Contact</router-link>
           </div>
         </div>
       </div>
@@ -150,7 +152,7 @@ onUnmounted(() => {
 }
 
 .footer-link:hover {
-  color: var(--secondary-color);
+  color: var(--accent-color);
   text-decoration: none;
 }
 
@@ -217,7 +219,7 @@ onUnmounted(() => {
 }
 
 .back-to-top:hover {
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }

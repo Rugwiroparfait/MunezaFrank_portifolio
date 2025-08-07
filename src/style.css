@@ -1,12 +1,18 @@
 /* Global styles for portfolio */
 :root {
-  --primary-color: #2c3e50;
-  --secondary-color: #3498db;
-  --accent-color: #e74c3c;
-  --text-light: #ecf0f1;
-  --text-dark: #2c3e50;
+  /* Professional Color Palette */
+  --primary-color: #1E40AF;
+  --secondary-color: #2563EB;
+  --accent-color: #10B981;
+  --background: #F9FAFB;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  
+  /* Legacy variable mappings for backward compatibility */
+  --text-light: #F9FAFB;
+  --text-dark: #111827;
   --background-light: #ffffff;
-  --background-dark: #34495e;
+  --background-dark: #1E40AF;
   --section-padding: 4rem 0;
 }
 
@@ -19,8 +25,9 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   line-height: 1.6;
-  color: var(--text-dark);
+  color: var(--text-primary);
   overflow-x: hidden;
+  background-color: var(--background);
 }
 
 html {
@@ -35,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
   margin-bottom: 1rem;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* Custom button styles */

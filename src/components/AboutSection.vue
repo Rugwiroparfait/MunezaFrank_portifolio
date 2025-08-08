@@ -20,12 +20,12 @@
             <div class="mb-4">
               <h3 class="h4 mb-3">My Journey in Data Science</h3>
               <p class="lead">
-                I'm a passionate data scientist with over 5 years of experience in transforming 
+                I'm a passionate data scientist with 2 years of experience in transforming 
                 complex data into actionable business insights. My expertise spans across machine 
                 learning, statistical analysis, and data visualization.
               </p>
               <p>
-                I hold a Master's degree in Data Science and have worked with diverse industries 
+                I am a university student in a a sector of agriculture and have worked with diverse industries 
                 including finance, healthcare, and e-commerce. I'm constantly learning and staying 
                 updated with the latest technologies and methodologies in the rapidly evolving 
                 field of data science.
@@ -128,15 +128,15 @@ const databaseSkills = ref([
 // Achievement highlights
 const achievements = ref([
   {
-    number: '50+',
+    number: '10+',
     label: 'Projects Completed'
   },
   {
-    number: '5+',
+    number: '2+',
     label: 'Years Experience'
   },
   {
-    number: '15+',
+    number: '5+',
     label: 'Happy Clients'
   }
 ])

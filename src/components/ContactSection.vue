@@ -26,8 +26,8 @@
                 <p class="contact-description">
                   Drop me a line and I'll get back to you as soon as possible
                 </p>
-                <a href="mailto:muneza.frank@example.com" class="contact-link">
-                  muneza.frank@example.com
+                <a href="mailto:frankmuneza2@gmail.com" class="frankmuneza2@gmail.com">
+                  frankmuneza2@gmail.com
                 </a>
               </div>
             </div>
@@ -42,8 +42,8 @@
                 <p class="contact-description">
                   Available for calls during business hours (9 AM - 6 PM)
                 </p>
-                <a href="tel:+250123456789" class="contact-link">
-                  +250 123 456 789
+                <a href="tel:+250786982779" class="0786982779">
+                  +250 786982779
                 </a>
               </div>
             </div>
@@ -54,7 +54,7 @@
             <h3 class="h4 mb-4">Connect With Me</h3>
             <div class="social-links">
               <a 
-                href="https://linkedin.com/in/munezafrank" 
+                href="https://www.linkedin.com/in/munezafrank22/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="social-link linkedin"
@@ -76,7 +76,7 @@
               </a>
               
               <a 
-                href="https://twitter.com/munezafrank" 
+                href="https://x.com/FrankMunez43036" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="social-link twitter"

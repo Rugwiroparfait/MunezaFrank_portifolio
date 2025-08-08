@@ -42,7 +42,6 @@
                   <span class="stat-value">{{ project.duration }}</span>
                 </div>
                 <div class="stat-item">
-                  <small class="text-muted">Type:</small>
                   <span class="stat-value">{{ project.type }}</span>
                 </div>
               </div>
@@ -93,47 +92,43 @@ import { ref } from 'vue'
 const projects = ref([
   {
     id: 1,
-    title: "Customer Churn Prediction Model",
-    description: "Developed a machine learning model to predict customer churn with 92% accuracy using ensemble methods. Implemented feature engineering and deployed the model to production using Flask API.",
+    title: "Agricultural Data Platform (In Progress)",
+    description: "Developing a platform to collect and sell real-time agricultural data from IoT sensors deployed in the field. Aims to enhance decision-making for cooperatives and agribusinesses in Rwanda.",
     icon: "📊",
     technologies: ["Python", "Scikit-learn", "Flask", "PostgreSQL"],
     duration: "3 months",
-    type: "ML Classification",
-    demoLink: "https://github.com/munezafrank/churn-prediction",
-    codeLink: "https://github.com/munezafrank/churn-prediction"
+    demoLink: "https://github.com/munezafrank",
+    codeLink: "https://github.com/munezafrank"
   },
   {
     id: 2,
-    title: "Sales Forecasting Dashboard",
-    description: "Built an interactive dashboard for sales forecasting using time series analysis. Integrated multiple data sources and provided real-time insights for business decision making.",
+    title: "Addressing micronutrient deficiencies",
+    description: "This project aims to address micronutrient deficiencies by identifying and targeting malnutrition hotspots using geospatial data. It  developed predictive models to assess malnutrition risk, analyze the root causes of stunting and nutrient deficiencies in Rwanda, and recommend multisectoral interventions involving health, agriculture, and education. The project also produced short policy briefs to support evidence-based local implementation.",
     icon: "📈",
     technologies: ["Python", "Tableau", "SQL", "AWS"],
     duration: "2 months",
-    type: "Time Series",
-    demoLink: "https://github.com/munezafrank/sales-forecasting",
-    codeLink: "https://github.com/munezafrank/sales-forecasting"
+    demoLink: "https://github.com/munezafrank/rwandan-nourish-maps",
+    codeLink: "https://github.com/munezafrank/rwandan-nourish-maps"
   },
   {
     id: 3,
-    title: "Market Sentiment Analysis",
-    description: "Analyzed social media sentiment to predict stock market trends. Used NLP techniques and deep learning models to process large volumes of text data from multiple platforms.",
+    title: "Climate Resilience and Disaster Risk Management",
+    description: "This project focuses on enhancing climate resilience by building tools to predict and monitor risks such as floods, droughts, and landslides. It will use geospatial data to visualize hazard-prone areas, develop early warning systems through SMS and mobile app notifications, and support community-based disaster risk planning and preparedness.",
     icon: "🧠",
     technologies: ["Python", "TensorFlow", "NLTK", "MongoDB"],
     duration: "4 months",
-    type: "NLP & Deep Learning",
-    demoLink: "https://github.com/munezafrank/sentiment-analysis",
-    codeLink: "https://github.com/munezafrank/sentiment-analysis"
+    demoLink: "https://github.com/munezafrank",
+    codeLink: "https://github.com/munezafrank"
   },
   {
     id: 4,
-    title: "Healthcare Data Analytics Platform",
-    description: "Designed and implemented a comprehensive analytics platform for healthcare data. Enabled hospitals to track patient outcomes and optimize resource allocation through data-driven insights.",
+    title: "Open Innovation: Mobile/Web-Based Data Solutions",
+    description: "This project aims to develop an innovative mobile and web-based application aligned with Rwanda’s development goals and NST2 priorities. Leveraging open and public datasets, including those from NISR, the application will target key sectors such as health, education, agriculture, finance, or transportation. The focus will be on usability, accessibility across devices (Android, iOS, Windows), and delivering high-impact solutions that support national development.",
     icon: "🏥",
     technologies: ["R", "Shiny", "MySQL", "Docker"],
     duration: "6 months",
-    type: "Healthcare Analytics",
-    demoLink: "https://github.com/munezafrank/healthcare-analytics",
-    codeLink: "https://github.com/munezafrank/healthcare-analytics"
+    demoLink: "https://github.com/munezafrank",
+    codeLink: "https://github.com/munezafrank"
   }
 ])
 

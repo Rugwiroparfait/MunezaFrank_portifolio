@@ -26,8 +26,8 @@
                 <p class="contact-description">
                   Drop me a line and I'll get back to you as soon as possible
                 </p>
-                <a href="mailto:muneza.frank@example.com" class="contact-link">
-                  muneza.frank@example.com
+                <a href="mailto:frankmuneza2@gmail.com" class="contact-link">
+                  frankmuneza2@gmail.com
                 </a>
               </div>
             </div>
@@ -42,8 +42,8 @@
                 <p class="contact-description">
                   Available for calls during business hours (9 AM - 6 PM)
                 </p>
-                <a href="tel:+250123456789" class="contact-link">
-                  +250 123 456 789
+                <a href="tel:+250786982779" class="contact-link">
+                  +250 786982779
                 </a>
               </div>
             </div>

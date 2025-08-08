@@ -6,7 +6,7 @@
       <div class="page-header text-center py-5">
         <h1 class="page-title">Professional Certificates</h1>
         <p class="page-subtitle text-secondary">
-          My continuous learning journey in data science and technology
+          My verified professional achievements and continuing education
         </p>
       </div>
 
@@ -19,61 +19,45 @@
             :key="certificate.id"
           >
             <div class="certificate-card h-100">
-              <!-- Certificate Header -->
-              <div class="certificate-header">
-                <div class="certificate-icon">
-                  <i class="cert-emoji">{{ certificate.icon }}</i>
+              <!-- Certificate Image -->
+              <div class="certificate-image-container">
+                <div v-if="certificate.isPdf" class="pdf-preview">
+                  <div class="pdf-icon">📄</div>
+                  <p class="pdf-label">PDF Certificate</p>
                 </div>
-                <div class="certificate-badge" :class="certificate.badgeClass">
-                  {{ certificate.type }}
-                </div>
+                <img 
+                  v-else
+                  :src="certificate.imageUrl" 
+                  :alt="certificate.title"
+                  class="certificate-image"
+                  @click="openFullView(certificate)"
+                />
               </div>
 
               <!-- Certificate Content -->
               <div class="certificate-content">
-                <h3 class="certificate-title">{{ certificate.name }}</h3>
+                <h3 class="certificate-title">{{ certificate.title }}</h3>
                 <p class="certificate-issuer">
                   <strong>Issued by:</strong> {{ certificate.issuer }}
-                </p>
-                <p class="certificate-date">
-                  <strong>Date:</strong> {{ certificate.date }}
                 </p>
                 <p class="certificate-description">
                   {{ certificate.description }}
                 </p>
 
-                <!-- Skills covered -->
-                <div class="certificate-skills mb-3">
-                  <h5 class="skills-title">Skills Covered:</h5>
-                  <div class="skills-tags">
-                    <span 
-                      class="skill-tag" 
-                      v-for="skill in certificate.skills" 
-                      :key="skill"
-                    >
-                      {{ skill }}
-                    </span>
-                  </div>
-                </div>
-
                 <!-- Certificate Actions -->
-                <div class="certificate-actions">
-                  <a 
-                    v-if="certificate.verifyLink"
-                    :href="certificate.verifyLink" 
+                <div class="certificate-actions mt-3">
+                  <button 
                     class="btn btn-primary me-2 mb-2"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    @click="viewCertificate(certificate)"
                   >
-                    Verify Certificate
-                  </a>
+                    📋 View Certificate
+                  </button>
                   <a 
-                    v-if="certificate.credentialId"
-                    href="#" 
+                    :href="certificate.fileUrl" 
+                    :download="certificate.downloadName"
                     class="btn btn-outline-secondary mb-2"
-                    @click.prevent="copyCredentialId(certificate.credentialId)"
                   >
-                    Copy ID: {{ certificate.credentialId }}
+                    📥 Download
                   </a>
                 </div>
               </div>
@@ -82,152 +66,91 @@
         </div>
       </div>
 
-      <!-- Stats Section -->
-      <div class="stats-section py-5">
-        <div class="row text-center">
-          <div class="col-md-4">
-            <div class="stat-item">
-              <div class="stat-number">{{ certificateStats.total }}</div>
-              <div class="stat-label">Total Certificates</div>
-            </div>
+      <!-- Certificate Modal -->
+      <div v-if="selectedCertificate" class="certificate-modal" @click="closeModal">
+        <div class="modal-content" @click.stop>
+          <div class="modal-header">
+            <h3>{{ selectedCertificate.title }}</h3>
+            <button class="btn-close" @click="closeModal">&times;</button>
           </div>
-          <div class="col-md-4">
-            <div class="stat-item">
-              <div class="stat-number">{{ certificateStats.specializations }}</div>
-              <div class="stat-label">Specializations</div>
+          <div class="modal-body">
+            <div v-if="selectedCertificate.isPdf" class="pdf-viewer">
+              <embed 
+                :src="selectedCertificate.fileUrl" 
+                type="application/pdf"
+                class="pdf-embed"
+              />
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="stat-item">
-              <div class="stat-number">{{ certificateStats.hoursLearning }}</div>
-              <div class="stat-label">Hours of Learning</div>
-            </div>
+            <img 
+              v-else
+              :src="selectedCertificate.imageUrl" 
+              :alt="selectedCertificate.title"
+              class="modal-image"
+            />
           </div>
         </div>
-      </div>
-
-      <!-- Call to Action -->
-      <div class="cta-section text-center py-5">
-        <h3 class="h4 mb-3">Interested in my expertise?</h3>
-        <p class="text-secondary mb-4">
-          Let's discuss how my certified skills can benefit your projects
-        </p>
-        <router-link to="/#contact" class="btn btn-primary btn-lg">
-          Get In Touch
-        </router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
-// Certificate data
+// Real certificates from public folder
 const certificates = ref([
   {
     id: 1,
-    name: "Machine Learning Specialization",
-    issuer: "Stanford University (Coursera)",
-    date: "March 2023",
-    icon: "🤖",
-    type: "Specialization",
-    badgeClass: "badge-specialization",
-    description: "Comprehensive program covering supervised learning, unsupervised learning, and best practices in machine learning.",
-    skills: ["Supervised Learning", "Neural Networks", "Unsupervised Learning", "Recommender Systems"],
-    verifyLink: "https://coursera.org/verify/specialization/ABC123",
-    credentialId: "ML-SPEC-2023-001"
+    title: "ALX Venture Founder Academy - Six Week Deep Dive",
+    issuer: "ALX",
+    description: "Intensive entrepreneurship program focused on building scalable ventures and leadership skills.",
+    fileUrl: "/certificates/ALX venture Founder academy_muneza_frank_six_week _deep_dive.jpeg",
+    imageUrl: "/certificates/ALX venture Founder academy_muneza_frank_six_week _deep_dive.jpeg",
+    downloadName: "ALX_Venture_Founder_Academy_Muneza_Frank.jpeg",
+    isPdf: false
   },
   {
     id: 2,
-    name: "Deep Learning Specialization",
-    issuer: "DeepLearning.AI",
-    date: "January 2023",
-    icon: "🧠",
-    type: "Specialization",
-    badgeClass: "badge-specialization",
-    description: "Advanced deep learning concepts including neural networks, CNNs, RNNs, and sequence models.",
-    skills: ["Deep Learning", "TensorFlow", "CNNs", "RNNs", "Keras"],
-    verifyLink: "https://coursera.org/verify/specialization/DEF456",
-    credentialId: "DL-SPEC-2023-002"
+    title: "ALX Professional Foundation for Digital Age",
+    issuer: "ALX",
+    description: "Comprehensive foundation program preparing professionals for the digital economy and modern workplace.",
+    fileUrl: "/certificates/ALX_Munezafrank _professional_foundation_for_digital_age.jpeg",
+    imageUrl: "/certificates/ALX_Munezafrank _professional_foundation_for_digital_age.jpeg",
+    downloadName: "ALX_Professional_Foundation_Muneza_Frank.jpeg",
+    isPdf: false
   },
   {
     id: 3,
-    name: "AWS Certified Cloud Practitioner",
-    issuer: "Amazon Web Services",
-    date: "September 2022",
-    icon: "☁️",
-    type: "Certification",
-    badgeClass: "badge-certification",
-    description: "Foundational understanding of AWS Cloud services, pricing, and basic architecture principles.",
-    skills: ["AWS Cloud", "Cloud Computing", "EC2", "S3", "Lambda"],
-    verifyLink: "https://aws.amazon.com/verification/GHI789",
-    credentialId: "AWS-CCP-2022-003"
-  },
-  {
-    id: 4,
-    name: "Google Data Analytics Professional Certificate",
-    issuer: "Google (Coursera)",
-    date: "June 2022",
-    icon: "📊",
-    type: "Professional Certificate",
-    badgeClass: "badge-professional",
-    description: "Comprehensive data analytics program covering data cleaning, analysis, and visualization.",
-    skills: ["Data Analysis", "SQL", "Tableau", "R Programming", "Data Visualization"],
-    verifyLink: "https://coursera.org/verify/professional-cert/JKL012",
-    credentialId: "GDA-PROF-2022-004"
-  },
-  {
-    id: 5,
-    name: "Python for Data Science and AI",
-    issuer: "IBM (Coursera)",
-    date: "April 2022",
-    icon: "🐍",
-    type: "Course Certificate",
-    badgeClass: "badge-course",
-    description: "Hands-on Python programming for data science applications and artificial intelligence.",
-    skills: ["Python", "Pandas", "NumPy", "Matplotlib", "Jupyter"],
-    verifyLink: "https://coursera.org/verify/MNO345",
-    credentialId: "PY-DS-2022-005"
-  },
-  {
-    id: 6,
-    name: "Tableau Desktop Specialist",
-    issuer: "Tableau",
-    date: "February 2022",
-    icon: "📈",
-    type: "Certification",
-    badgeClass: "badge-certification",
-    description: "Proficiency in creating visualizations and dashboards using Tableau Desktop.",
-    skills: ["Tableau", "Data Visualization", "Dashboard Design", "Business Intelligence"],
-    verifyLink: "https://tableau.com/verify/PQR678",
-    credentialId: "TAB-SPEC-2022-006"
+    title: "Sustainable Food Value Chains for Nutrition",
+    issuer: "Academic Institution",
+    description: "Certificate in sustainable agriculture and nutrition-focused food systems development.",
+    fileUrl: "/certificates/sustainable_food_value_chains_for_nutrition_muneza_frank.pdf",
+    imageUrl: null,
+    downloadName: "Sustainable_Food_Value_Chains_Muneza_Frank.pdf",
+    isPdf: true
   }
 ])
 
-// Certificate statistics
-const certificateStats = computed(() => ({
-  total: certificates.value.length,
-  specializations: certificates.value.filter(cert => cert.type === 'Specialization').length,
-  hoursLearning: '500+' // Estimated total learning hours
-}))
+// Modal functionality
+const selectedCertificate = ref(null)
 
-// Copy credential ID to clipboard
-const copyCredentialId = async (credentialId) => {
-  try {
-    await navigator.clipboard.writeText(credentialId)
-    // You could add a toast notification here
-    alert(`Credential ID copied: ${credentialId}`)
-  } catch (err) {
-    console.error('Failed to copy credential ID:', err)
-  }
+const viewCertificate = (certificate) => {
+  selectedCertificate.value = certificate
+}
+
+const openFullView = (certificate) => {
+  selectedCertificate.value = certificate
+}
+
+const closeModal = () => {
+  selectedCertificate.value = null
 }
 </script>
 
 <style scoped>
 /* Certificates page styles */
 .certificates-page {
-  padding-top: 80px; /* Account for fixed header */
+  padding-top: 80px;
   min-height: 100vh;
   background-color: var(--background);
 }
@@ -268,48 +191,42 @@ const copyCredentialId = async (credentialId) => {
   box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
 
-/* Certificate header */
-.certificate-header {
-  background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-  padding: 1.5rem;
+/* Certificate image container */
+.certificate-image-container {
+  height: 250px;
+  overflow: hidden;
   position: relative;
-  color: white;
+  background: #f8f9fa;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
 }
 
-.certificate-icon {
-  font-size: 2.5rem;
+.certificate-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
-.cert-emoji {
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+.certificate-image:hover {
+  transform: scale(1.05);
 }
 
-.certificate-badge {
-  background: rgba(255,255,255,0.2);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
+.pdf-preview {
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.pdf-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.pdf-label {
   font-weight: 500;
-  backdrop-filter: blur(10px);
-}
-
-.badge-specialization {
-  background: rgba(16, 185, 129, 0.2);
-}
-
-.badge-certification {
-  background: rgba(249, 115, 22, 0.2);
-}
-
-.badge-professional {
-  background: rgba(139, 92, 246, 0.2);
-}
-
-.badge-course {
-  background: rgba(34, 197, 94, 0.2);
+  margin: 0;
 }
 
 /* Certificate content */
@@ -322,10 +239,10 @@ const copyCredentialId = async (credentialId) => {
   font-weight: 600;
   margin-bottom: 1rem;
   font-size: 1.25rem;
+  line-height: 1.4;
 }
 
-.certificate-issuer,
-.certificate-date {
+.certificate-issuer {
   color: var(--text-secondary);
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
@@ -335,30 +252,6 @@ const copyCredentialId = async (credentialId) => {
   color: var(--text-secondary);
   margin-bottom: 1rem;
   line-height: 1.6;
-}
-
-/* Skills tags */
-.skills-title {
-  color: var(--primary-color);
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.skills-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.skill-tag {
-  background: var(--accent-color);
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 15px;
-  font-size: 0.8rem;
-  font-weight: 500;
 }
 
 /* Certificate actions */
@@ -395,47 +288,92 @@ const copyCredentialId = async (credentialId) => {
   border-color: var(--text-secondary);
 }
 
-/* Stats section */
-.stats-section {
-  background: white;
-  border-radius: 15px;
-  margin: 2rem 0;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* Certificate Modal */
+.certificate-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  padding: 1rem;
 }
 
-.stat-item {
+.modal-content {
+  background: white;
+  border-radius: 15px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header {
   padding: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary-color);
+  color: white;
 }
 
-.stat-number {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--secondary-color);
-  margin-bottom: 0.5rem;
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
 }
 
-.stat-label {
-  color: var(--text-secondary);
-  font-weight: 500;
+.btn-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
 }
 
-/* CTA section */
-.cta-section {
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+.btn-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-body {
+  padding: 0;
+  max-height: 70vh;
+  overflow: auto;
+}
+
+.modal-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 70vh;
+}
+
+.pdf-embed {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
   .page-title {
     font-size: 2.5rem;
-  }
-  
-  .certificate-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
   }
   
   .certificate-content {
@@ -446,6 +384,15 @@ const copyCredentialId = async (credentialId) => {
     width: 100%;
     margin-bottom: 0.5rem;
   }
+  
+  .modal-content {
+    max-width: 95vw;
+    max-height: 95vh;
+  }
+  
+  .pdf-viewer {
+    height: 60vh;
+  }
 }
 
 @media (max-width: 576px) {
@@ -453,8 +400,8 @@ const copyCredentialId = async (credentialId) => {
     font-size: 2rem;
   }
   
-  .stat-number {
-    font-size: 2rem;
+  .certificate-image-container {
+    height: 200px;
   }
 }
 </style>

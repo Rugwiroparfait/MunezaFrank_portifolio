@@ -41,6 +41,22 @@
             type="application/pdf" 
             class="pdf-embed"
           />
+          <!-- Fallback for browsers that don't support PDF embedding -->
+          <div class="pdf-fallback text-center" v-if="!pdfSupported">
+            <div class="fallback-content">
+              <h3>PDF Viewer Not Supported</h3>
+              <p class="text-secondary mb-4">
+                Your browser doesn't support PDF viewing. Please download the resume to view it.
+              </p>
+              <a 
+                :href="resumePdfUrl" 
+                download="Muneza_Frank_Resume.pdf"
+                class="btn btn-primary"
+              >
+                📄 Download Resume PDF
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -71,6 +87,20 @@
                       <p>Professional work history and achievements</p>
                     </div>
                   </div>
+                  <div class="col-md-6">
+                    <div class="highlight-item">
+                      <div class="highlight-icon">🛠️</div>
+                      <h4>Skills</h4>
+                      <p>Technical and professional competencies</p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="highlight-item">
+                      <div class="highlight-icon">🏆</div>
+                      <h4>Achievements</h4>
+                      <p>Notable accomplishments and recognitions</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -84,21 +114,30 @@
 <script setup>
 import { ref } from 'vue'
 
+// Resume PDF URL from public folder
 const resumePdfUrl = ref('/resume/Resume.pdf')
-const showInlineViewer = ref(false)
 
+// Inline viewer state
+const showInlineViewer = ref(false)
+const pdfSupported = ref(true)
+
+/**
+ * Toggle the inline PDF viewer
+ */
 const toggleViewer = () => {
   showInlineViewer.value = !showInlineViewer.value
 }
 </script>
 
 <style scoped>
+/* Resume page styles */
 .resume-page {
   padding-top: 80px;
   min-height: 100vh;
   background-color: var(--background);
 }
 
+/* Page header */
 .page-header {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
   color: white;
@@ -119,7 +158,7 @@ const toggleViewer = () => {
   margin: 0 auto;
 }
 
-.btn {
+.resume-actions .btn {
   border-radius: 25px;
   font-weight: 500;
   padding: 0.75rem 1.5rem;
@@ -127,6 +166,43 @@ const toggleViewer = () => {
   transition: all 0.3s ease;
 }
 
+.resume-actions .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary {
+  border-color: white;
+  color: white;
+}
+
+.btn-outline-primary:hover {
+  background-color: white;
+  border-color: white;
+  color: var(--primary-color);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+/* PDF Viewer */
 .resume-viewer {
   margin: 2rem 0;
   background: white;
@@ -142,12 +218,34 @@ const toggleViewer = () => {
   border: 1px solid #e9ecef;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 .pdf-embed {
   width: 100%;
   height: 100%;
   border: none;
+}
+
+.pdf-fallback {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+}
+
+.fallback-content {
+  padding: 2rem;
+}
+
+/* Resume Summary */
+.resume-summary {
+  margin-bottom: 3rem;
 }
 
 .summary-card {
@@ -170,6 +268,10 @@ const toggleViewer = () => {
   font-size: 1.1rem;
   line-height: 1.6;
   margin-bottom: 2rem;
+}
+
+.resume-highlights {
+  margin-top: 2rem;
 }
 
 .highlight-item {
@@ -203,5 +305,48 @@ const toggleViewer = () => {
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2.5rem;
+  }
+  
+  .summary-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .pdf-container {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .resume-actions .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .resume-actions .me-3 {
+    margin-right: 0 !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .page-title {
+    font-size: 2rem;
+  }
+  
+  .summary-card {
+    padding: 1.5rem;
+  }
+  
+  .highlight-item {
+    padding: 1rem;
+  }
+  
+  .highlight-icon {
+    font-size: 2.5rem;
+  }
 }
 </style>

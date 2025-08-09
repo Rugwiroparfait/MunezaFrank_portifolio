@@ -20,12 +20,12 @@
             <div class="mb-4">
               <h3 class="h4 mb-3">My Journey in Data Science</h3>
               <p class="lead">
-                I'm a passionate data scientist with over 5 years of experience in transforming 
+                I'm a passionate data scientist with over 2 years of experience in transforming 
                 complex data into actionable business insights. My expertise spans across machine 
                 learning, statistical analysis, and data visualization.
               </p>
               <p>
-                I hold a Master's degree in Data Science and have worked with diverse industries 
+                I am student in  Data Science and have worked with diverse industries 
                 including finance, healthcare, and e-commerce. I'm constantly learning and staying 
                 updated with the latest technologies and methodologies in the rapidly evolving 
                 field of data science.

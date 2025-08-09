@@ -99,8 +99,8 @@ const projects = ref([
     technologies: ["Python", "Scikit-learn", "Flask", "PostgreSQL"],
     duration: "3 months",
     type: "ML Classification",
-    demoLink: "https://github.com/munezafrank/churn-prediction",
-    codeLink: "https://github.com/munezafrank/churn-prediction"
+    demoLink: "https://github.com/munezafrank",
+    codeLink: "https://github.com/munezafrank"
   },
   {
     id: 2,
@@ -110,8 +110,8 @@ const projects = ref([
     technologies: ["Python", "Tableau", "SQL", "AWS"],
     duration: "2 months",
     type: "Time Series",
-    demoLink: "https://github.com/munezafrank/sales-forecasting",
-    codeLink: "https://github.com/munezafrank/sales-forecasting"
+    demoLink: "https://github.com/munezafrank",
+    codeLink: "https://github.com/munezafrank"
   },
   {
     id: 3,
@@ -121,8 +121,8 @@ const projects = ref([
     technologies: ["Python", "TensorFlow", "NLTK", "MongoDB"],
     duration: "4 months",
     type: "NLP & Deep Learning",
-    demoLink: "https://github.com/munezafrank/sentiment-analysis",
-    codeLink: "https://github.com/munezafrank/sentiment-analysis"
+    demoLink: "https://github.com/munezafrank",
+    codeLink: "https://github.com/munezafrank"
   },
   {
     id: 4,
@@ -132,8 +132,8 @@ const projects = ref([
     technologies: ["R", "Shiny", "MySQL", "Docker"],
     duration: "6 months",
     type: "Healthcare Analytics",
-    demoLink: "https://github.com/munezafrank/healthcare-analytics",
-    codeLink: "https://github.com/munezafrank/healthcare-analytics"
+    demoLink: "https://github.com/munezafrank",
+    codeLink: "https://github.com/munezafrank"
   }
 ])
 

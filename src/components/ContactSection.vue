@@ -76,7 +76,7 @@
               </a>
               
               <a 
-                href="https://twitter.com/munezafrank" 
+                href="https://twitter.com/munezafrank43036" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 class="social-link twitter"
@@ -84,17 +84,6 @@
               >
                 <span class="social-icon">🐦</span>
                 <span class="social-label">Twitter</span>
-              </a>
-              
-              <a 
-                href="https://medium.com/@munezafrank" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="social-link medium"
-                title="Medium"
-              >
-                <span class="social-icon">📝</span>
-                <span class="social-label">Medium</span>
               </a>
             </div>
           </div>
